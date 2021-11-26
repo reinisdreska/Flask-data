@@ -39,7 +39,7 @@ def data():
         table_string = str(table_dict)
         table = table_string.replace("Table", "").replace("{", "").replace("}", "").replace(":", "").replace("'", "")
         print(table)
-        mycursor.execute("SELECT  * FROM "+ table +" LIMIT 10;")
+        mycursor.execute("SELECT  * FROM "+ table)
         data_tuples = mycursor.fetchall()
         
         return render_template("data.html", title="Data", data=data_tuples)
