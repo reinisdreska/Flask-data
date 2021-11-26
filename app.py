@@ -20,9 +20,11 @@ mycursor.execute("USE reinis_test")
 @app.route("/")
 def tables():
     mycursor.execute("SHOW TABLES")
+    tables_arr = []
     for tables in mycursor:
-        continue
-    tables_string = "".join(tables)
+        tables_arr += tables
+    separator = ", "
+    tables_string = separator.join(tables_arr)
 
     return render_template("tables.html", title="Tables", tables=tables_string)
 
@@ -44,6 +46,19 @@ def data():
         
         return render_template("data.html", title="Data", data=data_tuples)
 
-@app.route("/crate")
+@app.route("/crate_table")
+def crate_table():
+    return render_template("crate_table.html", title="Crate Table ")
+
+@app.route("/crate", methods = ['POST'])
 def crate():
-    return render_template("crate.html", title="Crate Data")
+    if request.method == 'POST':
+        remove = ["{", "}", ":", "'"]
+        table_raw = request.form
+        table_dict = table_raw.to_dict(flat=True)
+        table_string = str(table_dict)
+        table = table_string.replace("Table", "").replace("variable_1", "").replace("variable_2", "").replace("variable_3", "").replace("variable_4", "").replace("variable_5", "").replace("{", "").replace("}", "").replace(":", "").replace("'", "").replace(",", "")
+        table_arr = table.split()
+        print(table_arr)
+        mycursor.execute("CREATE TABLE "+ table_arr[0] +" ( "+ table_arr[1] + " VARCHAR(100), "+ table_arr[2] + " VARCHAR(100), "+ table_arr[3] + " VARCHAR(100), "+ table_arr[4] + " VARCHAR(100), "+ table_arr[5] + " VARCHAR(100))")
+        return render_template("crate.html", title="Crate ")
