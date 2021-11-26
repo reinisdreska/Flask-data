@@ -1,9 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>Data tests</p>
+    <p>Dati kas atrodas tabulā</p>
+    <table id="data" class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Message</th>
+            <th>Message Count</th>
+            <th>Server</th>
+            <th>Application</th>
+            <th>Added At</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sd in data %} <!-- šādi tam nevajag būt bet tas bija lai pārbaudītu -->
+            <tr>
+                <td>{{ sd[0] }}</td>
+                <td>{{ sd[1] }}</td>
+                <td>{{ sd[2] }}</td>
+                <td>{{ sd[3] }}</td>
+                <td>{{ sd[4] }}</td>
+                <td>{{ sd[5] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
-
-<!-- {% block scripts %}
-    
-{% endblock %} -->
