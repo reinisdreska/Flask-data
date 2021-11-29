@@ -3,11 +3,10 @@
 {% block content %}
     <form action = "http://localhost:5000/crate_table_end" method = "POST">
         <p>Table name <input type = "text" name = "Table" /></p>
-        <p>variable 1<input type = "text" name = "variable_1" /></p>
-        <p>variable 2<input type = "text" name = "variable_2" /></p>
-        <p>variable 3<input type = "text" name = "variable_3" /></p>
-        <p>variable 4<input type = "text" name = "variable_4" /></p>
-        <p>variable 5<input type = "text" name = "variable_5" /></p>
+        {% for i in range(variable) %}
+            {% set the_var = "variable_"+ i|string %}
+            <p>Variable {{i + 1}}<input type = "text" name = {{the_var}} /></p>
+        {% endfor %}
         <p><input type = "submit" value = "submit" /></p>
     </form>
 {% endblock %}
