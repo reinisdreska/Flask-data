@@ -6,23 +6,17 @@
     <table id="data" class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Message</th>
-            <th>Message Count</th>
-            <th>Server</th>
-            <th>Application</th>
-            <th>Added At</th>
+            {% for i in range(field_names |length) %}
+                <th>{{ field_names[i] }}</th>
+            {% endfor %}
         </tr>
         </thead>
         <tbody>
-        {% for sd in data %} <!-- šādi tam nevajag būt bet tas bija lai pārbaudītu -->
+        {% for sd in data %}
             <tr>
-                <td>{{ sd[0] }}</td>
-                <td>{{ sd[1] }}</td>
-                <td>{{ sd[2] }}</td>
-                <td>{{ sd[3] }}</td>
-                <td>{{ sd[4] }}</td>
-                <td>{{ sd[5] }}</td>
+                {% for i in range(sd |length) %}
+                    <td>{{ sd[i] }}</td>
+                {% endfor %}
             </tr>
         {% endfor %}
         </tbody>
