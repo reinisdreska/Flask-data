@@ -78,20 +78,20 @@ def crate_table_end():
         mycursor.execute(create_table_string)
         return render_template("crate.html", title="Crate")
 
-@app.route("/crate_row")
-def crate_row():
-    return render_template("crate_row.html", title="Crate Row")
+# @app.route("/crate_row")
+# def crate_row():
+#     return render_template("crate_row.html", title="Crate Row")
 
-@app.route("/crate_row_table", methods = ['POST'])
-def crate_row_table():
-    if request.method == 'POST':
-        table_raw = request.form
-        table_dict = table_raw.to_dict(flat=True)
-        table_string = str(table_dict)
-        table = table_string.replace("Table", "").replace("{", "").replace("}", "").replace(":", "").replace("'", "")
-        mycursor.execute("SELECT  * FROM "+ table)
-        field_names = [i[0] for i in mycursor.description]
-        return render_template("crate_row_table.html", title="Crate Row", field_names = field_names)
+# @app.route("/crate_row_table", methods = ['POST'])
+# def crate_row_table():
+#     if request.method == 'POST':
+#         table_raw = request.form
+#         table_dict = table_raw.to_dict(flat=True)
+#         table_string = str(table_dict)
+#         table = table_string.replace("Table", "").replace("{", "").replace("}", "").replace(":", "").replace("'", "")
+#         mycursor.execute("SELECT  * FROM "+ table)
+#         field_names = [i[0] for i in mycursor.description]
+#         return render_template("crate_row_table.html", title="Crate Row", field_names = field_names)
 
 # @app.route("/crate_row_end", methods = ['POST'])
 # def crate_row_end():
@@ -99,8 +99,12 @@ def crate_row_table():
 #         table_raw = request.form
 #         table_dict = table_raw.to_dict(flat=True)
 #         table_string = str(table_dict)
-#         table = table_string.replace("Table", "").replace("variable_1", "").replace("variable_2", "").replace("variable_3", "").replace("variable_4", "").replace("variable_5", "").replace("{", "").replace("}", "").replace(":", "").replace("'", "").replace(",", "")
+#         table = table_string.replace("{", "").replace("}", "").replace(":", "").replace("'", "").replace(",", "")
+#         field_names = [i[0] for i in mycursor.description]
+#         for i in range(len(field_names)):
+#             table = table.replace(field_names[i], "")
 #         table_arr = table.split()
-#         print(table_arr)
+#         #paliku te
+#         crate_row_string = "INSERT INTO"
 #         mycursor.execute("CREATE TABLE "+ table_arr[0] +" ( "+ table_arr[1] + " VARCHAR(100), "+ table_arr[2] + " VARCHAR(100), "+ table_arr[3] + " VARCHAR(100), "+ table_arr[4] + " VARCHAR(100), "+ table_arr[5] + " VARCHAR(100))")
 #         return render_template("crate.html", title="Crate ")
